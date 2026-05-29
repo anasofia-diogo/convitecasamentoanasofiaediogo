@@ -6,29 +6,36 @@
     <title>Convite de Casamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #f0f4f7; 
+        
+        html, body {
+            width: 100%;
             min-height: 100vh;
+            background-color: #f0f4f7;
+            overflow: auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: auto; /* Permite navegação livre ao abrir */
         }
         
         .convite-container { 
             position: relative; 
-            width: 90vw; 
+            width: 85vw; /* Ligeiramente mais estreito para criar margens naturais */
             max-width: 600px; 
             aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out;
-            /* Zoom inicial: Foca nas abas */
-            transform: scale(1.6); 
+            transform: scale(1.6);
+            transform-origin: center center;
             touch-action: pan-x pan-y pinch-zoom;
+            margin: auto;
         }
 
-        /* Zoom Out de apenas 10% (1.6 * 0.9 = 1.44) */
-        .abrir.convite-container { transform: scale(1.44); }
+        /* Margens extras ao abrir: Adicionamos um margin-left maior */
+        .abrir.convite-container { 
+            transform: scale(1.44); 
+            margin-left: 40px; /* Margem extra à esquerda */
+            margin-right: 20px; /* Margem extra à direita */
+        }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
         .porta-esquerda { left: 25%; transform-origin: left; }
