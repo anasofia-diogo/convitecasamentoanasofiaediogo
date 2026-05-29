@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Convite de Casamento</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #f0f4f7; display: flex; justify-content: center; align-items: center; height: 100vh; perspective: 2500px; }
+        .convite-container { position: relative; width: 92vw; max-width: 1100px; aspect-ratio: 297/210; transform-style: preserve-3d; }
+        
+        /* ZONA 1: Painel Central (Imagem 003) */
+        .painel-central { position: absolute; top: 0; left: 25%; width: 50%; height: 100%; z-index: 1; background: url('003.jpg') center/cover; }
+
+        .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 2.2s; z-index: 10; }
+        .porta-esquerda { left: 25%; transform-origin: left; }
+        .porta-direita { right: 25%; transform-origin: right; }
+        .abrir .porta-esquerda { transform: rotateY(-180deg); }
+        .abrir .porta-direita { transform: rotateY(180deg); }
+
+        .face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; overflow: hidden; }
+
+        /* ZONAS 2 e 3: Capas (Imagem 005) */
+        .face-frente { background: url('005.jpg'); background-size: 200% 100%; }
+        .porta-esquerda .face-frente { background-position: left; }
+        .porta-direita .face-frente { background-position: right; }
+
+        /* ZONA 4: Verso Esquerdo (Imagem 001.jpg) */
+        .porta-esquerda .face-verso { 
+            background: url('001.jpg') center/contain no-repeat; 
+            transform: rotateY(180deg); 
+            background-color: white; 
+        }
+
+        /* ZONA 5: Verso Direito (Imagem 002.jpg) */
+        .porta-direita .face-verso { 
+            background: url('002.jpg') center/contain no-repeat; 
+            transform: rotateY(180deg); 
+            background-color: white; 
+        }
+
+        .qr-link { position: absolute; left: 0; bottom: 0; width: 100%; height: 30%; z-index: 20; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="convite-container" id="convite" onclick="this.classList.toggle('abrir')">
+        <div class="painel-central"></div>
+        
+        <div class="porta-3d porta-esquerda">
+            <div class="face face-frente"></div>
+            <div class="face face-verso"></div>
+        </div>
+        
+        <div class="porta-3d porta-direita">
+            <div class="face face-frente"></div>
+            <div class="face face-verso">
+                <a href="https://sites.google.com/view/anasofiaediogo2026/p%C3%A1gina-inicial" target="_blank" class="qr-link"></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
