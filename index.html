@@ -2,24 +2,30 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes, viewport-fit=cover">
     <title>Convite de Casamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html, body {
             width: 100%;
-            min-height: 100vh;
+            /* Altura dinâmica robusta para Safari e Chrome */
+            height: 100vh;
+            height: 100dvh;
             background-color: #f0f4f7;
             overflow: auto;
             display: flex;
             justify-content: center;
             align-items: center;
+            /* Padding lateral gigante para navegação livre (scroll) */
+            padding-left: 50vw; 
+            padding-right: 50vw;
+            overscroll-behavior: none;
         }
         
         .convite-container { 
             position: relative; 
-            width: 85vw; /* Ligeiramente mais estreito para criar margens naturais */
+            width: 85vw; 
             max-width: 600px; 
             aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
@@ -27,17 +33,15 @@
             transform: scale(1.6);
             transform-origin: center center;
             touch-action: pan-x pan-y pinch-zoom;
+            flex-shrink: 0; /* Impede encolhimento */
             margin: auto;
         }
 
-        /* Margens extras ao abrir: Adicionamos um margin-left maior */
         .abrir.convite-container { 
             transform: scale(1.44); 
-            margin-left: 40px; /* Margem extra à esquerda */
-            margin-right: 20px; /* Margem extra à direita */
         }
 
-        .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
+        .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
         .porta-esquerda { left: 25%; transform-origin: left; }
         .porta-direita { right: 25%; transform-origin: right; }
         
@@ -76,5 +80,14 @@
         </div>
     </div>
 
+    <script>
+        // Correção de altura para Safari (iOS)
+        function setFullHeight() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        window.addEventListener('resize', setFullHeight);
+        setFullHeight();
+    </script>
 </body>
 </html>
