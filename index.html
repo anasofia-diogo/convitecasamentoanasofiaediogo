@@ -6,32 +6,29 @@
     <title>Convite de Casamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body { 
             background-color: #f0f4f7; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            /* Permitir scroll */
-            overflow: auto;
-            touch-action: manipulation;
+            min-height: 100vh;
+            padding: 20px; /* Espaço para não ficar colado */
+            display: block; /* Alterado de flex para permitir fluxo normal */
         }
         
         .convite-container { 
             position: relative; 
+            margin: 0 auto;
             width: 90vw; 
             max-width: 900px; 
             aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
             transition: transform 1.5s ease-in-out;
-            transform: scale(1.0); 
-            /* Permite ao telemóvel entender gestos */
-            touch-action: pan-x pan-y;
+            transform: scale(1.0);
+            /* Importante para não bloquear gestos */
+            touch-action: pan-x pan-y pinch-zoom;
         }
 
         .abrir.convite-container { transform: scale(0.9); }
 
-        /* Botão Fechar */
         .btn-fechar {
             position: absolute;
             top: 10px;
