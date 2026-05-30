@@ -69,9 +69,24 @@
     </div>
 
     <script>
-        // Garante que o scroll inicial esteja no topo
         window.onload = function() {
-            window.scrollTo(0, 0);
+            // Pequeno atraso para garantir que o render 3D estabilizou
+            setTimeout(() => {
+                const container = document.getElementById('convite');
+                // Calcula a posição do centro do container
+                const containerWidth = container.offsetWidth;
+                const windowWidth = window.innerWidth;
+                
+                // Define o scroll para que o meio do convite coincida com o meio do ecrã
+                // Se estiver deslocado para a direita, ajustamos aqui:
+                const scrollX = (containerWidth / 2) - (windowWidth / 2);
+                
+                window.scrollTo({
+                    left: scrollX, 
+                    top: 0,
+                    behavior: 'instant' // 'instant' evita animações de scroll ao abrir
+                });
+            }, 200); // 200 milissegundos é o tempo ideal para estabilizar
         };
     </script>
 </body>
