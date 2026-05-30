@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Convite de Casamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,8 +11,9 @@
             width: 100%;
             height: 100%;
             background-color: #f0f4f7;
-            /* Mudança crucial: hidden evita o scroll do browser */
-            overflow: hidden; 
+            overflow: auto;
+            /* Forçamos o body a ter uma largura mínima fixa, ignorando o modo computador */
+            min-width: 1000px; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,19 +22,17 @@
         
         .convite-container { 
             position: relative;
-            /* Usamos percentagem para nunca ser maior que o ecrã */
-            width: 90vw; 
-            max-width: 600px;
-            aspect-ratio: 297/210; 
+            /* Largura e altura fixas em pixels evitam que o modo computador estique o convite */
+            width: 600px; 
+            height: 420px; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out;
-            transform: scale(1.8); 
-            margin-top: 100px; /* Ajusta este valor para descer o convite */
+            transform: scale(1.5); /* Ajusta este valor para o zoom que queres */
             flex-shrink: 0;
             touch-action: pan-x pan-y pinch-zoom;
         }
 
-        .abrir.convite-container { transform: scale(1.6); }
+        .abrir.convite-container { transform: scale(1.1); }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
         .porta-esquerda { left: 25%; transform-origin: left; }
@@ -69,5 +68,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Centralização à prova de falhas
+        window.onload = function() {
+            window.scrollTo((document.body.scrollWidth - window.innerWidth) / 2, 0);
+        };
+    </script>
 </body>
 </html>
