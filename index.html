@@ -2,91 +2,88 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=600, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
-    <title>Convite de Casamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Convite Final</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        html, body {
-            width: 100%;
-            height: 100%;
-            background-color: #f0f4f7;
-            overflow: auto; /* Mantém o convite fixo no centro */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            padding: 0;
+        body { 
+            width: 100vw; 
+            height: 100dvh; /* O teu dVH para ignorar as barras do mobile */
+            background-color: #f0f4f7; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; /* O teu comando para evitar que a página salte */
         }
         
         .convite-container { 
-            position: relative;
-            width: 600px; 
-            height: 420px; 
+            position: relative; 
+            /* O teu sistema de tamanho dinâmico e proporção */
+            width: 95vw; 
+            aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
-            transition: transform 1.2s ease-in-out;
-            transform: scale(1.0); /* Ajusta se quiseres maior ou menor */
-            flex-shrink: 0;
-            margin-top: 5px; /* Margem superior para o convite não bater no topo */
-            touch-action: auto !important; /* Permite zoom e arrastar */
-            margin-left: auto;
-    margin-right: auto;
+            transition: transform 1.2s ease-in-out; 
+            /* O teu Zoom inicial otimizado */
+            transform: scale(2.0); 
+            touch-action: manipulation;
+            cursor: pointer;
         }
 
-        .abrir.convite-container { transform: scale(1.0); }
+        /* O teu tamanho ao abrir */
+        .convite-container.abrir { transform: scale(1.35); }
 
-        .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
-        .porta-esquerda { left: 25%; transform-origin: left; }
-        .porta-direita { right: 25%; transform-origin: right; }
+        /* --- DAQUI PARA BAIXO, A NOSSA ESTRUTURA VISUAL MANTÉM-SE IGUAL --- */
         
-        .abrir .porta-esquerda { transform: rotateY(-180deg); }
-        .abrir .porta-direita { transform: rotateY(180deg); }
+        .zona-azul-centro { 
+            position: absolute; top: 0; left: 25%; width: 50%; height: 100%; z-index: 1; 
+            background-image: url('003.jpg'); background-size: cover; background-position: center; 
+        }
+        
+        .porta { 
+            position: absolute; top: 0; height: 100%; width: 25%; z-index: 10; 
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            transform-style: preserve-3d; 
+        }
+        
+        .face { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            backface-visibility: hidden; -webkit-backface-visibility: hidden; 
+        }
+        .face-verso { transform: rotateY(180deg); }
 
-        .painel-central { position: absolute; top: 0; left: 25%; width: 50%; height: 100%; z-index: 1; background: url('003.jpg') center/cover; cursor: pointer; }
-        .face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; }
-        .face-frente { background: url('005.jpg'); background-size: 200% 100%; }
-        .porta-esquerda .face-frente { background-position: left; }
-        .porta-direita .face-frente { background-position: right; }
-        .porta-esquerda .face-verso { background: url('001.jpg') center/contain no-repeat; transform: rotateY(180deg); background-color: white; }
-        .porta-direita .face-verso { background: url('002.jpg') center/contain no-repeat; transform: rotateY(180deg); background-color: white; z-index: 50; }
-        .qr-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; display: block; }
+        .porta-esq { left: 25%; transform-origin: left; }
+        .porta-dir { left: 50%; transform-origin: right; }
+        
+        /* ZONAS ESPECÍFICAS COM AS IMAGENS */
+        .zona-vermelha { background-image: url('005.jpg'); background-size: 200% 100%; background-position: left; }
+        .zona-amarela  { background-image: url('005.jpg'); background-size: 200% 100%; background-position: right; }
+        .zona-lilas    { background-image: url('001.jpg'); background-size: cover; background-position: center; background-color: white; }
+        .zona-rosa     { background-image: url('002.jpg'); background-size: cover; background-position: center; background-color: white; }
+
+        .abrir .porta-esq { transform: rotateY(-180deg); }
+        .abrir .porta-dir { transform: rotateY(180deg); }
+        
+        .link-oculto { position: absolute; bottom: 0; width: 100%; height: 50%; z-index: 100; }
     </style>
 </head>
 <body>
 
-    <div class="convite-container" id="convite">
-        <div class="painel-central" onclick="document.getElementById('convite').classList.remove('abrir')"></div>
+    <div class="convite-container" id="convite" onclick="this.classList.toggle('abrir')">
+        <div class="zona-azul-centro"></div>
         
-        <div class="porta-3d porta-esquerda" onclick="document.getElementById('convite').classList.remove('abrir')">
-            <div class="face face-frente"></div>
-            <div class="face face-verso"></div>
+        <div class="porta porta-esq">
+            <div class="face face-frente zona-vermelha"></div>
+            <div class="face face-verso zona-lilas"></div>
         </div>
         
-        <div class="porta-3d porta-direita" onclick="if(!document.getElementById('convite').classList.contains('abrir')) { document.getElementById('convite').classList.add('abrir'); }">
-            <div class="face face-frente"></div>
-            <div class="face face-verso">
-                <a href="https://sites.google.com/view/anasofiaediogo2026/p%C3%A1gina-inicial" target="_blank" class="qr-link"></a>
+        <div class="porta porta-dir">
+            <div class="face face-frente zona-amarela"></div>
+            <div class="face face-verso zona-rosa">
+                <a href="https://sites.google.com/view/anasofiaediogo2026/p%C3%A1gina-inicial" target="_blank" class="link-oculto" onclick="event.stopPropagation()"></a>
             </div>
         </div>
     </div>
 
-    <script>
-       <script>
-        window.onload = function() {
-        setTimeout(() => {
-            // Calcula o centro da página
-            const convite = document.getElementById('convite');
-            const scrollX = (convite.offsetWidth - window.innerWidth) / 2;
-            const scrollY = (convite.offsetHeight - window.innerHeight) / 2;
-            
-            // Força o navegador a mostrar essa zona
-            window.scrollTo({
-                left: scrollX,
-                top: scrollY, // Se quiseres controlar a altura, ajusta aqui
-                behavior: 'instant'
-            });
-        }, 100);
-    };
-    </script>
 </body>
 </html>
