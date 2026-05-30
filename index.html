@@ -23,15 +23,15 @@
             width: 95vw; 
             aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
-            transition: transform 0.8s ease-in-out;
+            transition: transform 1.2s ease-in-out;
             /* Zoom inicial otimizado para mobile */
-            transform: scale(1.0); 
+            transform: scale(2.0); 
             touch-action: manipulation;
         }
 
         .abrir.convite-container { 
             /* Ao abrir, ele não encolhe, mantém o tamanho para ser fácil de ler */
-            transform: scale(1.0); 
+            transform: scale(1.35); 
         }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
