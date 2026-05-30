@@ -29,16 +29,17 @@
             transform: scale(1.2); 
             
             /* Esta linha dá a margem do topo que pediste */
-            margin-top: 180px; 
-           margin-left: -50px;   /* Adiciona isto para puxar para a esquerda */
+            margin-top: 120px; 
+           margin-left: -80px;   /* Adiciona isto para puxar para a esquerda */
 }
             
             flex-shrink: 0;
             touch-action: pan-x pan-y pinch-zoom;
+        touch-action: auto !important;
         }
         }
 
-        .abrir.convite-container { transform: scale(1.1); }
+        .abrir.convite-container { transform: scale(1.0); }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
         .porta-esquerda { left: 25%; transform-origin: left; }
