@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>Convite Final</title>
+    <title>Convite Final - Otimizado</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -14,8 +14,9 @@
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            /* 1. MUDAR PARA AUTO: Permite voltar a arrastar a imagem livremente */
             overflow: auto; 
+            /* CORREÇÃO 2: Adicionada perspetiva para o efeito 3D real não ficar "plano" */
+            perspective: 1200px; 
         }
         
         .convite-container { 
@@ -29,12 +30,11 @@
             cursor: pointer;
         }
 
-        /* 2. O TRUQUE DE MESTRE: Adicionar translateX(12%) para empurrar a imagem 001 para a direita */
         .convite-container.abrir { 
             transform: scale(1.35) translateX(12%); 
         }
 
-        /* --- ESTRUTURA VISUAL INTOCÁVEL --- */
+        /* --- ZONAS E ESTRUTURA VISUAL --- */
         
         .zona-azul-centro { 
             position: absolute; top: 0; left: 25%; width: 50%; height: 100%; z-index: 1; 
@@ -45,6 +45,9 @@
             position: absolute; top: 0; height: 100%; width: 25%; z-index: 10; 
             transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); 
             transform-style: preserve-3d; 
+            /* CORREÇÃO 1: Evita bugs visuais nas portas durante a rotação no Safari/iOS */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
         
         .face { 
@@ -64,7 +67,11 @@
         .abrir .porta-esq { transform: rotateY(-180deg); }
         .abrir .porta-dir { transform: rotateY(180deg); }
         
-        .link-oculto { position: absolute; bottom: 0; width: 100%; height: 50%; z-index: 100; }
+        .link-oculto { 
+            position: absolute; bottom: 0; width: 100%; height: 50%; z-index: 100; 
+            /* CORREÇÃO 3: Força o link fisicamente para a frente no espaço 3D para não perder o clique */
+            transform: translateZ(10px);
+        }
     </style>
 </head>
 <body>
