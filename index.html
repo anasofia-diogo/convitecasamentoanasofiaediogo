@@ -73,19 +73,20 @@
     <script>
        <script>
         window.onload = function() {
-            // Atraso de 300ms para garantir que o convite já está renderizado
-            setTimeout(() => {
-                // Ajusta estes valores para encontrar o ponto perfeito no teu OnePlus 12
-                const deslocamentoHorizontal = 250; // Quanto maior, mais para a direita
-                const deslocamentoVertical = 80;   // Quanto maior, mais para baixo
-                
-                window.scrollTo({
-                    left: deslocamentoHorizontal,
-                    top: deslocamentoVertical,
-                    behavior: 'instant' 
-                });
-            }, 300);
-        };
+        setTimeout(() => {
+            // Calcula o centro da página
+            const convite = document.getElementById('convite');
+            const scrollX = (convite.offsetWidth - window.innerWidth) / 2;
+            const scrollY = (convite.offsetHeight - window.innerHeight) / 2;
+            
+            // Força o navegador a mostrar essa zona
+            window.scrollTo({
+                left: scrollX,
+                top: scrollY, // Se quiseres controlar a altura, ajusta aqui
+                behavior: 'instant'
+            });
+        }, 100);
+    };
     </script>
 </body>
 </html>
