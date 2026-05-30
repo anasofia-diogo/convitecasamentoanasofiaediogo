@@ -20,16 +20,20 @@
             overscroll-behavior: none;
         }
         
-        .convite-container { 
+       .convite-container { 
             position: relative;
-            /* Largura e altura fixas em pixels evitam que o modo computador estique o convite */
             width: 600px; 
             height: 420px; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out;
-            transform: scale(1.5); /* Ajusta este valor para o zoom que queres */
+            transform: scale(1.5); 
+            
+            /* Esta linha dá a margem do topo que pediste */
+            margin-top: 80px; 
+            
             flex-shrink: 0;
             touch-action: pan-x pan-y pinch-zoom;
+        }
         }
 
         .abrir.convite-container { transform: scale(1.1); }
@@ -70,9 +74,19 @@
     </div>
 
     <script>
-        // Centralização à prova de falhas
-        window.onload = function() {
-            window.scrollTo((document.body.scrollWidth - window.innerWidth) / 2, 0);
+       window.onload = function() {
+            // Tempo de espera (100ms) para garantir que o navegador calculou o tamanho
+            setTimeout(() => {
+                // Calcula o centro horizontal (como já fazias)
+                const scrollX = (document.body.scrollWidth - window.innerWidth) / 2;
+                
+                // Força o scroll para o centro
+                window.scrollTo({
+                    left: scrollX,
+                    top: 0, // Como definimos margin-top no CSS, o 'top' fica perfeito
+                    behavior: 'auto' 
+                });
+            }, 100);
         };
     </script>
 </body>
