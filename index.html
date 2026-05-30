@@ -2,45 +2,45 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>Convite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Convite de Casamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        body {
-            width: 100vw;
-            height: 100dvh;
+        html, body {
+            width: 100%;
+            height: 100%;
             background-color: #f0f4f7;
-            overflow: auto; /* Permite scroll livre */
-            overflow: auto; /* Scroll permitido */
-        /* Forçamos o body a ter 3x a largura do ecrã */
-        min-width: 300vw; 
-        /* Usamos flex para posicionar o conteúdo no meio dessa largura gigante */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            overflow: auto;
+            /* Forçamos o body a ter uma largura mínima fixa, ignorando o modo computador */
+            min-width: 1000px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overscroll-behavior: none;
         }
         
         .convite-container { 
-        position: relative;
-        width: 95vw; 
-        max-width: 700px;
-        aspect-ratio: 297/210; 
-        transform-style: preserve-3d; 
-        transition: transform 1.2s ease-in-out;
-        transform: scale(2.0);
-        touch-action: pan-x pan-y pinch-zoom;
-        flex-shrink: 0;
-    }
-
-    .abrir.convite-container { transform: scale(1.35); }
+            position: relative;
+            /* Largura e altura fixas em pixels evitam que o modo computador estique o convite */
+            width: 600px; 
+            height: 420px; 
+            transform-style: preserve-3d; 
+            transition: transform 1.2s ease-in-out;
+            transform: scale(1.5); /* Ajusta este valor para o zoom que queres */
+            flex-shrink: 0;
+            touch-action: pan-x pan-y pinch-zoom;
         }
+
+        .abrir.convite-container { transform: scale(1.1); }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
         .porta-esquerda { left: 25%; transform-origin: left; }
         .porta-direita { right: 25%; transform-origin: right; }
+        
         .abrir .porta-esquerda { transform: rotateY(-180deg); }
         .abrir .porta-direita { transform: rotateY(180deg); }
+
         .painel-central { position: absolute; top: 0; left: 25%; width: 50%; height: 100%; z-index: 1; background: url('003.jpg') center/cover; cursor: pointer; }
         .face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; }
         .face-frente { background: url('005.jpg'); background-size: 200% 100%; }
@@ -70,16 +70,10 @@
     </div>
 
     <script>
-        // Truque para carregar a página já centrada no meio do padding
-        window.onload = () => {
-            const scrollX = (document.body.scrollWidth - window.innerWidth) / 2;
-            window.scrollTo(scrollX, 0);
+        // Centralização à prova de falhas
+        window.onload = function() {
+            window.scrollTo((document.body.scrollWidth - window.innerWidth) / 2, 0);
         };
     </script>
-    window.onload = function() {
-        // Calcula o centro exato da página (300vw)
-        const middle = (document.body.scrollWidth - window.innerWidth) / 2;
-        window.scrollTo(middle, 0);
-    };
 </body>
 </html>
