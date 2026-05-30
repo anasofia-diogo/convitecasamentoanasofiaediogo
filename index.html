@@ -9,31 +9,32 @@
         
         body { 
             width: 100vw; 
-            height: 100dvh; /* O teu dVH para ignorar as barras do mobile */
+            height: 100dvh; 
             background-color: #f0f4f7; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            overflow: hidden; /* O teu comando para evitar que a página salte */
+            /* 1. MUDAR PARA AUTO: Permite voltar a arrastar a imagem livremente */
+            overflow: auto; 
         }
         
         .convite-container { 
             position: relative; 
-            /* O teu sistema de tamanho dinâmico e proporção */
             width: 95vw; 
             aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out; 
-            /* O teu Zoom inicial otimizado */
             transform: scale(2.0); 
             touch-action: manipulation;
             cursor: pointer;
         }
 
-        /* O teu tamanho ao abrir */
-        .convite-container.abrir { transform: scale(1.35); }
+        /* 2. O TRUQUE DE MESTRE: Adicionar translateX(12%) para empurrar a imagem 001 para a direita */
+        .convite-container.abrir { 
+            transform: scale(1.35) translateX(12%); 
+        }
 
-        /* --- DAQUI PARA BAIXO, A NOSSA ESTRUTURA VISUAL MANTÉM-SE IGUAL --- */
+        /* --- ESTRUTURA VISUAL INTOCÁVEL --- */
         
         .zona-azul-centro { 
             position: absolute; top: 0; left: 25%; width: 50%; height: 100%; z-index: 1; 
@@ -55,7 +56,6 @@
         .porta-esq { left: 25%; transform-origin: left; }
         .porta-dir { left: 50%; transform-origin: right; }
         
-        /* ZONAS ESPECÍFICAS COM AS IMAGENS */
         .zona-vermelha { background-image: url('005.jpg'); background-size: 200% 100%; background-position: left; }
         .zona-amarela  { background-image: url('005.jpg'); background-size: 200% 100%; background-position: right; }
         .zona-lilas    { background-image: url('001.jpg'); background-size: cover; background-position: center; background-color: white; }
