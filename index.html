@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=600, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>Convite de Casamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,32 +11,24 @@
             width: 100%;
             height: 100%;
             background-color: #f0f4f7;
-            overflow: auto;
-            /* Forçamos o body a ter uma largura mínima fixa, ignorando o modo computador */
-            min-width: 1000px; 
+            overflow: hidden; /* Mantém o convite fixo no centro */
             display: flex;
             justify-content: center;
             align-items: center;
-            overscroll-behavior: none;
+            margin: 0;
+            padding: 0;
         }
         
-       .convite-container { 
+        .convite-container { 
             position: relative;
             width: 600px; 
             height: 420px; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out;
-            transform: scale(1.2); 
-            
-            /* Esta linha dá a margem do topo que pediste */
-            margin-top: 120px; 
-           margin-left: -80px;   /* Adiciona isto para puxar para a esquerda */
-}
-            
+            transform: scale(1.0); /* Ajusta se quiseres maior ou menor */
             flex-shrink: 0;
-            touch-action: pan-x pan-y pinch-zoom;
-        touch-action: auto !important;
-        }
+            margin-top: 50px; /* Margem superior para o convite não bater no topo */
+            touch-action: auto !important; /* Permite zoom e arrastar */
         }
 
         .abrir.convite-container { transform: scale(1.0); }
@@ -77,19 +69,9 @@
     </div>
 
     <script>
-       window.onload = function() {
-            // Tempo de espera (100ms) para garantir que o navegador calculou o tamanho
-            setTimeout(() => {
-                // Calcula o centro horizontal (como já fazias)
-                const scrollX = (document.body.scrollWidth - window.innerWidth) / 2;
-                
-                // Força o scroll para o centro
-                window.scrollTo({
-                    left: scrollX,
-                    top: 0, // Como definimos margin-top no CSS, o 'top' fica perfeito
-                    behavior: 'auto' 
-                });
-            }, 100);
+        // Garante que o scroll inicial esteja no topo
+        window.onload = function() {
+            window.scrollTo(0, 0);
         };
     </script>
 </body>
