@@ -12,27 +12,31 @@
             height: 100%;
             background-color: #f0f4f7;
             overflow: auto;
-            /* Forçamos o body a ter uma largura mínima fixa, ignorando o modo computador */
-            min-width: 1000px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overscroll-behavior: none;
+            min-width: 1000px;
+            .container {
+  display: flex;
+  justify-content: center; /* Centro horizontal */
+  align-items: center;     /* Centro vertical */
+}
+                      overscroll-behavior: none;
         }
         
         .convite-container { 
             position: relative;
-            /* Largura e altura fixas em pixels evitam que o modo computador estique o convite */
             width: 600px; 
             height: 420px; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out;
-            transform: scale(1.5); /* Ajusta este valor para o zoom que queres */
+            /* Zoom inicial de 2.0 */
+            transform: scale(2.0); 
             flex-shrink: 0;
             touch-action: pan-x pan-y pinch-zoom;
         }
 
-        .abrir.convite-container { transform: scale(1.1); }
+        .abrir.convite-container { 
+            /* Zoom ao abrir de 1.8 (redução muito subtil) */
+            transform: scale(1.8); 
+        }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
         .porta-esquerda { left: 25%; transform-origin: left; }
@@ -70,8 +74,8 @@
     </div>
 
     <script>
-        // Centralização à prova de falhas
         window.onload = function() {
+            // Centraliza horizontalmente e mantém o alinhamento inferior
             window.scrollTo((document.body.scrollWidth - window.innerWidth) / 2, 0);
         };
     </script>
