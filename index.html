@@ -27,7 +27,7 @@
             transition: transform 1.2s ease-in-out;
             transform: scale(1.0); /* Ajusta se quiseres maior ou menor */
             flex-shrink: 0;
-            margin-top: 20px; /* Margem superior para o convite não bater no topo */
+            margin-top: 5px; /* Margem superior para o convite não bater no topo */
             touch-action: auto !important; /* Permite zoom e arrastar */
             margin-left: auto;
     margin-right: auto;
@@ -71,24 +71,20 @@
     </div>
 
     <script>
+       <script>
         window.onload = function() {
-            // Pequeno atraso para garantir que o render 3D estabilizou
+            // Atraso de 300ms para garantir que o convite já está renderizado
             setTimeout(() => {
-                const container = document.getElementById('convite');
-                // Calcula a posição do centro do container
-                const containerWidth = container.offsetWidth;
-                const windowWidth = window.innerWidth;
-                
-                // Define o scroll para que o meio do convite coincida com o meio do ecrã
-                // Se estiver deslocado para a direita, ajustamos aqui:
-                const scrollX = (containerWidth / 2) - (windowWidth / 2);
+                // Ajusta estes valores para encontrar o ponto perfeito no teu OnePlus 12
+                const deslocamentoHorizontal = 100; // Quanto maior, mais para a direita
+                const deslocamentoVertical = 150;   // Quanto maior, mais para baixo
                 
                 window.scrollTo({
-                    left: scrollX, 
-                    top: 0,
-                    behavior: 'instant' // 'instant' evita animações de scroll ao abrir
+                    left: deslocamentoHorizontal,
+                    top: deslocamentoVertical,
+                    behavior: 'instant' 
                 });
-            }, 200); // 200 milissegundos é o tempo ideal para estabilizar
+            }, 300);
         };
     </script>
 </body>
