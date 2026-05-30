@@ -13,12 +13,13 @@
             background-color: #f0f4f7;
             overflow: auto;
             min-width: 1000px;
-            .container {
-  display: flex;
-  justify-content: center; /* Centro horizontal */
-  align-items: center;     /* Centro vertical */
-}
-                      overscroll-behavior: none;
+            display: flex;
+            justify-content: center;
+            /* Flex-end empurra o convite para baixo */
+            align-items: flex-end; 
+            /* Adiciona um pequeno padding inferior para não colar ao rodapé */
+            padding-bottom: 50px; 
+            overscroll-behavior: none;
         }
         
         .convite-container { 
