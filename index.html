@@ -12,14 +12,11 @@
             height: 100vh;
             height: 100dvh;
             background-color: #f0f4f7;
-            /* Permite scroll em todos os sentidos */
-            overflow: auto;
-            /* Flex para centralizar inicialmente */
+            overflow: auto; 
             display: flex;
             justify-content: center;
             align-items: center;
             overscroll-behavior: none;
-            /* Garante que o body ocupa pelo menos o espaço total */
             min-height: 100%;
             min-width: 100%;
         }
@@ -27,19 +24,25 @@
         .convite-container { 
             position: relative;
             width: 85vw; 
-            max-width: 600px; 
+            max-width: 700px; /* Aumentado ligeiramente */
             aspect-ratio: 297/210; 
             transform-style: preserve-3d; 
             transition: transform 1.2s ease-in-out;
-            transform: scale(1.6);
+            /* Zoom inicial aumentado de 1.6 para 1.8 */
+            transform: scale(1.8); 
             touch-action: pan-x pan-y pinch-zoom;
-            /* Margens gigantes para garantir espaço de manobra total */
-            margin: 50vh 50vw; 
+            /* MARGINS ASSIMÉTRICAS: 
+               Top/Bottom: 50vh
+               Left: 80vw (Mais margem esquerda = empurra para a direita)
+               Right: 20vw (Menos margem direita)
+            */
+            margin: 50vh 20vw 50vh 70vw; 
             flex-shrink: 0;
         }
 
         .abrir.convite-container { 
-            transform: scale(1.44); 
+            /* Redução subtil ao abrir */
+            transform: scale(1.6); 
         }
 
         .porta-3d { position: absolute; top: 0; width: 25%; height: 100%; transform-style: preserve-3d; transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; }
@@ -82,7 +85,6 @@
     </div>
 
     <script>
-        // Ajuste para garantir que o Safari (iOS) interpreta corretamente a altura
         function setFullHeight() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
